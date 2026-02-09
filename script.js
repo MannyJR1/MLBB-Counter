@@ -220,12 +220,13 @@ if(teamSearchInput) {
 }
 
 // --- 4. Logic วิเคราะห์ทีม (Gold Theme + Full List) ---
+// --- 4. Logic วิเคราะห์ทีม (ปรับปรุงให้เหมือนรูปตัวอย่างเป๊ะ) ---
 function analyzeTeam() {
     suggestionList.innerHTML = '';
     dreamTeamContainer.innerHTML = '<div class="text-gray-500 text-[10px] w-full text-center py-2 border border-dashed border-gray-600 rounded">เลือกศัตรู...</div>';
 
     if (enemyTeam.length === 0) {
-        suggestionList.innerHTML = `<div class="text-center text-gray-500 mt-10 text-xs"><p>เลือกฮีโร่ฝั่งตรงข้าม...</p></div>`;
+        suggestionList.innerHTML = `<div class="text-center text-gray-500 mt-20 opacity-60"><p class="text-5xl mb-3">🛡️</p><p>เลือกฮีโร่ฝั่งตรงข้ามเพื่อเริ่มวิเคราะห์</p></div>`;
         return;
     }
 
@@ -234,16 +235,13 @@ function analyzeTeam() {
 
     enemyTeam.forEach(enemy => {
         if (!enemy.weakAgainst) return; 
-
         enemy.weakAgainst.forEach(weak => {
             let name = typeof weak === 'string' ? weak : weak.name;
             let reason = typeof weak === 'string' ? 'ชนะทางโดยธรรมชาติ' : weak.reason;
-            
             if (!scores[name]) scores[name] = 0;
             if (!reasons[name]) reasons[name] = [];
-            
             scores[name] += 10;
-            reasons[name].push(`<span class="text-red-400 font-bold">${enemy.name}</span>: <span class="text-gray-400">${reason}</span>`);
+            reasons[name].push(`<span class="text-red-400 font-bold">${enemy.name}</span>: <span class="text-gray-300">${reason}</span>`);
         });
     });
 
@@ -259,7 +257,10 @@ function analyzeTeam() {
     }).filter(i => i).sort((a, b) => b.score - a.score);
 
     sorted.slice(0, 15).forEach((item, index) => {
+        // เช็คเงื่อนไข Gold Theme (แก้ทาง 2 ตัวขึ้นไป)
         const isGold = item.pureScore >= 2;
+
+        // กำหนด Class ตามธีม
         const containerClass = isGold 
             ? "border-2 border-yellow-500 bg-[#151515] shadow-lg shadow-yellow-900/20" 
             : "border border-gray-700 bg-gray-800 hover:bg-gray-750";
@@ -267,13 +268,14 @@ function analyzeTeam() {
         const badge = item.pureScore >= 1 
             ? `<span class="${isGold ? 'bg-yellow-500 text-black' : 'bg-gray-600 text-white'} text-[10px] font-extrabold px-1.5 py-0.5 rounded ml-2 flex items-center gap-1">KILL ${item.pureScore} ${isGold ? '🔥' : ''}</span>` 
             : '';
-        
+
+        // สร้างรายการเหตุผลแบบแสดงผลครบทุกบรรทัด
         let reasonsHtml = '';
         if (item.reasons.length > 0) {
             reasonsHtml = item.reasons.map(r => 
-                `<li class="mb-1.5 text-[10px] leading-relaxed flex items-start gap-1">
-                    <span class="mt-0.5 text-gray-500">•</span> 
-                    <span class="text-gray-300">${r}</span>
+                `<li class="mb-1.5 text-[11px] leading-relaxed flex items-start gap-2">
+                    <span class="mt-1 w-1.5 h-1.5 rounded-full bg-gray-500 shrink-0"></span> 
+                    <span>${r}</span>
                 </li>`
             ).join('');
         } else {
@@ -281,22 +283,26 @@ function analyzeTeam() {
         }
 
         suggestionList.innerHTML += `
-            <div class="p-3 rounded-xl border ${containerClass} mb-3 transition-all duration-300 relative overflow-hidden group">
-                ${isGold ? '<div class="absolute top-0 right-0 w-16 h-16 bg-yellow-500/10 blur-2xl rounded-full -mr-8 -mt-8 pointer-events-none"></div>' : ''}
-                <div class="flex gap-3 mb-2 relative z-10">
+            <div class="p-3 rounded-xl ${containerClass} mb-3 relative overflow-hidden group transition-all">
+                <div class="flex gap-4 mb-3 relative z-10">
                     <div class="relative shrink-0">
-                        <img src="hero icon/${item.name}.png" class="w-12 h-12 rounded-lg bg-black border border-gray-600 object-cover">
-                        <div class="absolute -top-2 -left-2 bg-gray-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-gray-500 font-bold shadow-md">#${index+1}</div>
+                        <img src="hero icon/${item.name}.png" class="w-14 h-14 rounded-lg bg-black border border-gray-600 object-cover">
+                        <div class="absolute -top-2 -left-2 w-6 h-6 rounded-full flex items-center justify-center bg-gray-700 text-white border border-gray-500 text-[10px] font-bold shadow-md">#${index+1}</div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center gap-1">
+                    <div class="flex-1 min-w-0 flex flex-col justify-center">
+                        <div class="flex items-center">
                             <h4 class="text-white font-bold text-sm truncate">${item.name}</h4>
                             ${badge}
                         </div>
-                        <span class="text-[9px] text-gray-400 bg-black/30 px-1.5 py-0.5 rounded border border-gray-700 uppercase font-semibold mt-1 inline-block">${item.info.role}</span>
+                        <div class="mt-1">
+                             <span class="text-[9px] text-gray-400 bg-[#2a2a2a] px-2 py-0.5 rounded border border-gray-700 uppercase font-bold tracking-wider inline-block">${item.info.role}</span>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-black/20 rounded-lg p-2 border border-white/5 relative z-10">
+                
+                <div class="h-px w-full ${isGold ? 'bg-yellow-500/20' : 'bg-gray-700'} mb-3"></div>
+                
+                <div class="relative z-10 pl-1">
                     <ul class="text-gray-300">
                         ${reasonsHtml}
                     </ul>
@@ -306,7 +312,6 @@ function analyzeTeam() {
 
     updateDreamTeam(sorted);
 }
-
 // --- 5. Dream Team (Fixed Width Card Style) ---
 function updateDreamTeam(candidates) {
     dreamTeamContainer.innerHTML = '';
@@ -371,3 +376,4 @@ function openLeaderboard() {
     document.getElementById('leaderboardModal').classList.remove('hidden');
     document.getElementById('leaderboardModal').classList.add('flex');
 }
+
