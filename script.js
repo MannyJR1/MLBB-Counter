@@ -85,6 +85,7 @@ function openModal(hero) {
     
     if (hero.weakAgainst) {
         hero.weakAgainst.forEach(item => {
+            // รองรับทั้ง String และ Object
             let name = typeof item === 'string' ? item : item.name;
             let reason = typeof item === 'string' ? 'แพ้ทาง (Counter Pick)' : item.reason;
             
@@ -264,15 +265,15 @@ function analyzeTeam() {
 
         // --- Styles Config ---
         const containerClass = isGold 
-            ? "border-yellow-500/70 bg-gradient-to-r from-[#1a1810] to-[#2d2505] shadow-[0_0_15px_rgba(234,179,8,0.15)]" 
-            : "border-gray-700 bg-gray-800 hover:bg-gray-750";
+            ? "border-2 border-yellow-500 bg-[#151515] shadow-lg shadow-yellow-900/20" 
+            : "border border-gray-700 bg-gray-800 hover:bg-gray-750";
 
         const nameColor = isGold ? "text-yellow-400" : "text-white";
         const rankBadgeClass = isGold ? "bg-yellow-500 text-black border-yellow-300" : "bg-gray-700 text-white border-gray-500";
         
         // Badge KILL
         const badge = item.pureScore >= 1 
-            ? `<span class="${isGold ? 'bg-red-600 text-white shadow-sm' : 'bg-yellow-600 text-black'} text-[9px] font-bold px-1.5 rounded ml-2">KILL ${item.pureScore} 🔥</span>` 
+            ? `<span class="${isGold ? 'bg-yellow-500 text-black' : 'bg-gray-600 text-white'} text-[10px] font-extrabold px-1.5 py-0.5 rounded ml-2 flex items-center gap-1">KILL ${item.pureScore} ${isGold ? '🔥' : ''}</span>` 
             : '';
         
         // --- Full List Reasons (ไม่มีการซ่อน) ---
@@ -281,7 +282,7 @@ function analyzeTeam() {
             reasonsHtml = item.reasons.map(r => 
                 `<li class="mb-1 text-[10px] leading-relaxed flex items-start gap-1">
                     <span class="mt-0.5 text-gray-500">•</span> 
-                    <span>${r}</span>
+                    <span class="text-gray-300">${r}</span>
                 </li>`
             ).join('');
         } else {
@@ -290,7 +291,7 @@ function analyzeTeam() {
 
         // --- Render HTML ---
         suggestionList.innerHTML += `
-            <div class="p-2 rounded-xl border ${containerClass} items-start mb-2 transition-all duration-300 relative overflow-hidden group">
+            <div class="p-2 rounded-xl ${containerClass} items-start mb-2 transition-all duration-300 relative overflow-hidden group">
                 ${isGold ? '<div class="absolute top-0 right-0 w-16 h-16 bg-yellow-500/10 blur-2xl rounded-full -mr-8 -mt-8 pointer-events-none"></div>' : ''}
                 
                 <div class="flex gap-3 mb-2 relative z-10">
