@@ -15,7 +15,7 @@ function handleSortChange() {
     filterHeroes(currentFilter);
 }
 
-// --- 1. Main Grid ---
+// --- 1. Main Grid (หน้าแสดงฮีโร่ทั้งหมด) ---
 function displayHeroes(heroes) {
     heroGrid.innerHTML = '';
     let sortedHeroes = [...heroes];
@@ -73,7 +73,7 @@ searchInput.addEventListener('input', (e) => {
     displayHeroes(filtered);
 });
 
-// --- 2. Modal (รองรับ String/Object) ---
+// --- 2. Modal (แสดงรายละเอียดฮีโร่เมื่อกด) ---
 function openModal(hero) {
     document.getElementById('modalName').innerText = hero.name;
     document.getElementById('modalRole').innerText = hero.role;
@@ -85,7 +85,6 @@ function openModal(hero) {
     
     if (hero.weakAgainst) {
         hero.weakAgainst.forEach(item => {
-            // รองรับทั้ง String และ Object
             let name = typeof item === 'string' ? item : item.name;
             let reason = typeof item === 'string' ? 'แพ้ทาง (Counter Pick)' : item.reason;
             
@@ -111,7 +110,7 @@ function closeModal() {
     document.body.classList.remove('modal-open');
 }
 
-// --- 3. Team Analysis ---
+// --- 3. Team Analysis (Selection & Suggestions) ---
 const teamModal = document.getElementById('teamModal');
 const pickerGrid = document.getElementById('pickerGrid');
 const suggestionList = document.getElementById('suggestionList');
@@ -167,7 +166,8 @@ function addToEnemyTeam(hero) {
     if (enemyTeam.length >= 5) return;
     enemyTeam.push(hero);
     updateEnemySlots();
-    renderPickerGrid(document.getElementById('teamSearch').value);
+    const searchVal = document.getElementById('teamSearch') ? document.getElementById('teamSearch').value : "";
+    renderPickerGrid(searchVal);
     analyzeTeam();
 }
 
@@ -175,7 +175,8 @@ function removeEnemy(index) {
     if (index < enemyTeam.length) {
         enemyTeam.splice(index, 1);
         updateEnemySlots();
-        renderPickerGrid(document.getElementById('teamSearch').value);
+        const searchVal = document.getElementById('teamSearch') ? document.getElementById('teamSearch').value : "";
+        renderPickerGrid(searchVal);
         analyzeTeam();
     }
 }
@@ -185,7 +186,7 @@ function updateEnemySlots() {
         const slot = document.getElementById(`enemySlot${i+1}`);
         if (enemyTeam[i]) {
             slot.innerHTML = `<img src="hero icon/${enemyTeam[i].name}.png" class="w-full h-full rounded-full object-cover">
-                              <div class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center border border-white">x</div>`;
+                              <div class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center border border-white" onclick="removeEnemy(${i})">x</div>`;
             slot.classList.add('border-red-500');
             slot.classList.remove('border-dashed', 'border-gray-500');
         } else {
@@ -207,27 +208,30 @@ function filterPicker(role) {
             btn.classList.remove('bg-gray-700', 'text-gray-300', 'border-gray-500');
         }
     });
-    renderPickerGrid(document.getElementById('teamSearch').value);
+    const searchVal = document.getElementById('teamSearch') ? document.getElementById('teamSearch').value : "";
+    renderPickerGrid(searchVal);
 }
 
-document.getElementById('teamSearch').addEventListener('input', (e) => {
-    renderPickerGrid(e.target.value);
-});
+const teamSearchInput = document.getElementById('teamSearch');
+if(teamSearchInput) {
+    teamSearchInput.addEventListener('input', (e) => {
+        renderPickerGrid(e.target.value);
+    });
+}
 
-// --- Logic วิเคราะห์ทีม (Gold Theme + Full List) ---
+// --- 4. Logic วิเคราะห์ทีม (Gold Theme + Full List) ---
 function analyzeTeam() {
     suggestionList.innerHTML = '';
     dreamTeamContainer.innerHTML = '<div class="text-gray-500 text-[10px] w-full text-center py-2 border border-dashed border-gray-600 rounded">เลือกศัตรู...</div>';
 
     if (enemyTeam.length === 0) {
-        suggestionList.innerHTML = `<div class="text-center text-gray-500 mt-10 text-xs"><p>เลือกฮีโร่...</p></div>`;
+        suggestionList.innerHTML = `<div class="text-center text-gray-500 mt-10 text-xs"><p>เลือกฮีโร่ฝั่งตรงข้าม...</p></div>`;
         return;
     }
 
     let scores = {};
     let reasons = {};
 
-    // 1. หาฮีโร่แก้ทาง
     enemyTeam.forEach(enemy => {
         if (!enemy.weakAgainst) return; 
 
@@ -239,48 +243,35 @@ function analyzeTeam() {
             if (!reasons[name]) reasons[name] = [];
             
             scores[name] += 10;
-            // ไฮไลท์ชื่อศัตรู
             reasons[name].push(`<span class="text-red-400 font-bold">${enemy.name}</span>: <span class="text-gray-400">${reason}</span>`);
         });
     });
 
-    // 2. บวกคะแนน WinRate
     heroesData.forEach(h => {
         if (!scores[h.name]) scores[h.name] = 0;
         scores[h.name] += (h.winRate || 50) / 10;
     });
 
-    // 3. เรียงลำดับ
     let sorted = Object.keys(scores).map(key => {
         const info = heroesData.find(h => h.name === key);
         if(!info || enemyTeam.some(e => e.name === info.name)) return null;
         return { name: key, score: scores[key], reasons: reasons[key] || [], info, pureScore: reasons[key] ? reasons[key].length : 0 };
     }).filter(i => i).sort((a, b) => b.score - a.score);
 
-    // 4. แสดงผล (Gold Frame & Full List)
     sorted.slice(0, 15).forEach((item, index) => {
-        
-        // --- เช็คว่าต้องใช้ Gold Theme ไหม (Kill >= 2) ---
         const isGold = item.pureScore >= 2;
-
-        // --- Styles Config ---
         const containerClass = isGold 
             ? "border-2 border-yellow-500 bg-[#151515] shadow-lg shadow-yellow-900/20" 
             : "border border-gray-700 bg-gray-800 hover:bg-gray-750";
 
-        const nameColor = isGold ? "text-yellow-400" : "text-white";
-        const rankBadgeClass = isGold ? "bg-yellow-500 text-black border-yellow-300" : "bg-gray-700 text-white border-gray-500";
-        
-        // Badge KILL
         const badge = item.pureScore >= 1 
             ? `<span class="${isGold ? 'bg-yellow-500 text-black' : 'bg-gray-600 text-white'} text-[10px] font-extrabold px-1.5 py-0.5 rounded ml-2 flex items-center gap-1">KILL ${item.pureScore} ${isGold ? '🔥' : ''}</span>` 
             : '';
         
-        // --- Full List Reasons (ไม่มีการซ่อน) ---
         let reasonsHtml = '';
         if (item.reasons.length > 0) {
             reasonsHtml = item.reasons.map(r => 
-                `<li class="mb-1 text-[10px] leading-relaxed flex items-start gap-1">
+                `<li class="mb-1.5 text-[10px] leading-relaxed flex items-start gap-1">
                     <span class="mt-0.5 text-gray-500">•</span> 
                     <span class="text-gray-300">${r}</span>
                 </li>`
@@ -289,25 +280,22 @@ function analyzeTeam() {
             reasonsHtml = '<li class="text-gray-500 text-[10px]">Pick จาก Win Rate สูง</li>';
         }
 
-        // --- Render HTML ---
         suggestionList.innerHTML += `
-            <div class="p-2 rounded-xl ${containerClass} items-start mb-2 transition-all duration-300 relative overflow-hidden group">
+            <div class="p-3 rounded-xl border ${containerClass} mb-3 transition-all duration-300 relative overflow-hidden group">
                 ${isGold ? '<div class="absolute top-0 right-0 w-16 h-16 bg-yellow-500/10 blur-2xl rounded-full -mr-8 -mt-8 pointer-events-none"></div>' : ''}
-                
                 <div class="flex gap-3 mb-2 relative z-10">
                     <div class="relative shrink-0">
-                        <img src="hero icon/${item.name}.png" class="w-12 h-12 rounded-lg bg-black border ${isGold ? 'border-yellow-500/50' : 'border-gray-600'} object-cover">
-                        <div class="absolute -top-2 -left-2 w-5 h-5 rounded-full flex items-center justify-center text-[10px] border font-bold ${rankBadgeClass}">#${index+1}</div>
+                        <img src="hero icon/${item.name}.png" class="w-12 h-12 rounded-lg bg-black border border-gray-600 object-cover">
+                        <div class="absolute -top-2 -left-2 bg-gray-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-gray-500 font-bold shadow-md">#${index+1}</div>
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-1">
-                            <h4 class="${nameColor} font-bold text-sm truncate">${item.name}</h4>
+                            <h4 class="text-white font-bold text-sm truncate">${item.name}</h4>
                             ${badge}
                         </div>
-                        <span class="text-[9px] text-gray-400 bg-black/30 px-1.5 py-0.5 rounded border border-gray-600 uppercase font-semibold mt-1 inline-block backdrop-blur-sm">${item.info.role}</span>
+                        <span class="text-[9px] text-gray-400 bg-black/30 px-1.5 py-0.5 rounded border border-gray-700 uppercase font-semibold mt-1 inline-block">${item.info.role}</span>
                     </div>
                 </div>
-                
                 <div class="bg-black/20 rounded-lg p-2 border border-white/5 relative z-10">
                     <ul class="text-gray-300">
                         ${reasonsHtml}
@@ -319,10 +307,9 @@ function analyzeTeam() {
     updateDreamTeam(sorted);
 }
 
-// --- 5. Dream Team (Card Style Fixed Width) ---
+// --- 5. Dream Team (Fixed Width Card Style) ---
 function updateDreamTeam(candidates) {
     dreamTeamContainer.innerHTML = '';
-    // ใช้ justify-center และ gap เพื่อความสวยงาม
     dreamTeamContainer.className = "flex justify-center gap-2 md:gap-4 w-full py-2 overflow-x-auto no-scrollbar";
 
     const used = new Set();
@@ -336,7 +323,6 @@ function updateDreamTeam(candidates) {
 
     pos.forEach(p => {
         const best = candidates.find(c => p.f(c.info) && !used.has(c.name));
-        
         let content = '';
         let containerClass = '';
 
@@ -359,7 +345,6 @@ function updateDreamTeam(candidates) {
             `;
         }
 
-        // Lock Width (w-20)
         dreamTeamContainer.innerHTML += `
             <div class="flex-none w-20 md:w-24 rounded-xl p-2 border ${containerClass} flex flex-col items-center justify-center transition-all hover:-translate-y-1">
                 <span class="text-[8px] text-blue-300/70 uppercase font-bold mb-1 tracking-wider">${p.l}</span>
@@ -369,7 +354,10 @@ function updateDreamTeam(candidates) {
 }
 
 // Leaderboard Logic
-function closeLeaderboard() { document.getElementById('leaderboardModal').classList.add('hidden'); document.getElementById('leaderboardModal').classList.remove('flex'); }
+function closeLeaderboard() { 
+    document.getElementById('leaderboardModal').classList.add('hidden'); 
+    document.getElementById('leaderboardModal').classList.remove('flex'); 
+}
 function openLeaderboard() {
     const lb = document.getElementById('leaderboardContent');
     lb.innerHTML = '';
@@ -377,7 +365,7 @@ function openLeaderboard() {
         lb.innerHTML += `<div class="grid grid-cols-12 gap-1 px-4 py-2 border-b border-gray-700 text-xs items-center text-gray-300">
             <div class="col-span-2 text-center text-yellow-500 font-bold">#${i+1}</div>
             <div class="col-span-6 flex items-center gap-2"><img src="hero icon/${h.name}.png" class="w-6 h-6 rounded"> ${h.name}</div>
-            <div class="col-span-4 text-right">${h.winRate}%</div>
+            <div class="col-span-4 text-right">${h.winRate.toFixed(2)}%</div>
         </div>`;
     });
     document.getElementById('leaderboardModal').classList.remove('hidden');
