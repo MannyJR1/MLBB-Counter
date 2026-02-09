@@ -73,7 +73,7 @@ searchInput.addEventListener('input', (e) => {
     displayHeroes(filtered);
 });
 
-// --- 2. Modal ---
+// --- 2. Modal (รองรับ String/Object) ---
 function openModal(hero) {
     document.getElementById('modalName').innerText = hero.name;
     document.getElementById('modalRole').innerText = hero.role;
@@ -85,7 +85,6 @@ function openModal(hero) {
     
     if (hero.weakAgainst) {
         hero.weakAgainst.forEach(item => {
-            // รองรับทั้ง String และ Object
             let name = typeof item === 'string' ? item : item.name;
             let reason = typeof item === 'string' ? 'แพ้ทาง (Counter Pick)' : item.reason;
             
@@ -214,7 +213,7 @@ document.getElementById('teamSearch').addEventListener('input', (e) => {
     renderPickerGrid(e.target.value);
 });
 
-// --- Logic วิเคราะห์ทีม ---
+// --- Logic วิเคราะห์ทีม (Gold Theme + Full List) ---
 function analyzeTeam() {
     suggestionList.innerHTML = '';
     dreamTeamContainer.innerHTML = '<div class="text-gray-500 text-[10px] w-full text-center py-2 border border-dashed border-gray-600 rounded">เลือกศัตรู...</div>';
@@ -227,11 +226,11 @@ function analyzeTeam() {
     let scores = {};
     let reasons = {};
 
+    // 1. หาฮีโร่แก้ทาง
     enemyTeam.forEach(enemy => {
         if (!enemy.weakAgainst) return; 
 
         enemy.weakAgainst.forEach(weak => {
-            // รองรับทั้ง String และ Object
             let name = typeof weak === 'string' ? weak : weak.name;
             let reason = typeof weak === 'string' ? 'ชนะทางโดยธรรมชาติ' : weak.reason;
             
@@ -239,54 +238,77 @@ function analyzeTeam() {
             if (!reasons[name]) reasons[name] = [];
             
             scores[name] += 10;
-            reasons[name].push(`<span class="text-red-300 font-bold">${enemy.name}</span>: ${reason}`);
+            // ไฮไลท์ชื่อศัตรู
+            reasons[name].push(`<span class="text-red-400 font-bold">${enemy.name}</span>: <span class="text-gray-400">${reason}</span>`);
         });
     });
 
+    // 2. บวกคะแนน WinRate
     heroesData.forEach(h => {
         if (!scores[h.name]) scores[h.name] = 0;
         scores[h.name] += (h.winRate || 50) / 10;
     });
 
+    // 3. เรียงลำดับ
     let sorted = Object.keys(scores).map(key => {
         const info = heroesData.find(h => h.name === key);
         if(!info || enemyTeam.some(e => e.name === info.name)) return null;
         return { name: key, score: scores[key], reasons: reasons[key] || [], info, pureScore: reasons[key] ? reasons[key].length : 0 };
     }).filter(i => i).sort((a, b) => b.score - a.score);
 
+    // 4. แสดงผล (Gold Frame & Full List)
     sorted.slice(0, 15).forEach((item, index) => {
-        const badge = item.pureScore >= 1 ? `<span class="bg-yellow-500 text-black text-[9px] font-bold px-1.5 rounded ml-2">KILL ${item.pureScore}</span>` : '';
         
-        // --- Responsive Reasons Logic ---
+        // --- เช็คว่าต้องใช้ Gold Theme ไหม (Kill >= 2) ---
+        const isGold = item.pureScore >= 2;
+
+        // --- Styles Config ---
+        const containerClass = isGold 
+            ? "border-yellow-500/70 bg-gradient-to-r from-[#1a1810] to-[#2d2505] shadow-[0_0_15px_rgba(234,179,8,0.15)]" 
+            : "border-gray-700 bg-gray-800 hover:bg-gray-750";
+
+        const nameColor = isGold ? "text-yellow-400" : "text-white";
+        const rankBadgeClass = isGold ? "bg-yellow-500 text-black border-yellow-300" : "bg-gray-700 text-white border-gray-500";
+        
+        // Badge KILL
+        const badge = item.pureScore >= 1 
+            ? `<span class="${isGold ? 'bg-red-600 text-white shadow-sm' : 'bg-yellow-600 text-black'} text-[9px] font-bold px-1.5 rounded ml-2">KILL ${item.pureScore} 🔥</span>` 
+            : '';
+        
+        // --- Full List Reasons (ไม่มีการซ่อน) ---
         let reasonsHtml = '';
         if (item.reasons.length > 0) {
-            // บรรทัดแรก (โชว์เสมอ)
-            reasonsHtml += `<li class="mb-0.5 text-gray-300">• ${item.reasons[0]}</li>`;
-            
-            if (item.reasons.length > 1) {
-                const remaining = item.reasons.slice(1);
-                // บนมือถือ (ซ่อน), บนคอม (โชว์)
-                reasonsHtml += remaining.map(r => `<li class="mb-0.5 text-gray-400 hidden md:block">• ${r}</li>`).join('');
-                // สรุปยอดบนมือถือ (โชว์เฉพาะมือถือ)
-                reasonsHtml += `<li class="mt-1 text-yellow-500/80 text-[9px] italic block md:hidden ml-1">...และอีก ${remaining.length} ตัว</li>`;
-            }
+            reasonsHtml = item.reasons.map(r => 
+                `<li class="mb-1 text-[10px] leading-relaxed flex items-start gap-1">
+                    <span class="mt-0.5 text-gray-500">•</span> 
+                    <span>${r}</span>
+                </li>`
+            ).join('');
         } else {
-            reasonsHtml = '<li class="text-gray-500">Pick จาก Win Rate สูง</li>';
+            reasonsHtml = '<li class="text-gray-500 text-[10px]">Pick จาก Win Rate สูง</li>';
         }
 
+        // --- Render HTML ---
         suggestionList.innerHTML += `
-            <div class="flex gap-3 p-2 rounded-lg border border-gray-700 bg-gray-800 items-start hover:bg-gray-750 transition-colors">
-                <div class="relative shrink-0">
-                    <img src="hero icon/${item.name}.png" class="w-12 h-12 rounded-lg bg-black border border-gray-600">
-                    <div class="absolute -top-2 -left-2 bg-gray-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-gray-500 font-bold shadow-md">#${index+1}</div>
-                </div>
-                <div class="flex-1 min-w-0">
-                    <div class="flex items-center mb-1">
-                        <h4 class="text-white font-bold text-sm truncate">${item.name}</h4>
-                        ${badge}
+            <div class="p-2 rounded-xl border ${containerClass} items-start mb-2 transition-all duration-300 relative overflow-hidden group">
+                ${isGold ? '<div class="absolute top-0 right-0 w-16 h-16 bg-yellow-500/10 blur-2xl rounded-full -mr-8 -mt-8 pointer-events-none"></div>' : ''}
+                
+                <div class="flex gap-3 mb-2 relative z-10">
+                    <div class="relative shrink-0">
+                        <img src="hero icon/${item.name}.png" class="w-12 h-12 rounded-lg bg-black border ${isGold ? 'border-yellow-500/50' : 'border-gray-600'} object-cover">
+                        <div class="absolute -top-2 -left-2 w-5 h-5 rounded-full flex items-center justify-center text-[10px] border font-bold ${rankBadgeClass}">#${index+1}</div>
                     </div>
-                    <span class="text-[9px] text-gray-400 bg-gray-900 px-1.5 py-0.5 rounded border border-gray-700">${item.info.role}</span>
-                    <ul class="mt-2 text-[10px] text-gray-300 list-inside leading-relaxed">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-1">
+                            <h4 class="${nameColor} font-bold text-sm truncate">${item.name}</h4>
+                            ${badge}
+                        </div>
+                        <span class="text-[9px] text-gray-400 bg-black/30 px-1.5 py-0.5 rounded border border-gray-600 uppercase font-semibold mt-1 inline-block backdrop-blur-sm">${item.info.role}</span>
+                    </div>
+                </div>
+                
+                <div class="bg-black/20 rounded-lg p-2 border border-white/5 relative z-10">
+                    <ul class="text-gray-300">
                         ${reasonsHtml}
                     </ul>
                 </div>
@@ -296,10 +318,10 @@ function analyzeTeam() {
     updateDreamTeam(sorted);
 }
 
-// --- 4. Dream Team (แก้ไขให้ไม่ยืด) ---
+// --- 5. Dream Team (Card Style Fixed Width) ---
 function updateDreamTeam(candidates) {
     dreamTeamContainer.innerHTML = '';
-    // จัดกึ่งกลาง และไม่ให้ยืดเต็มจอ (ใช้ justify-center)
+    // ใช้ justify-center และ gap เพื่อความสวยงาม
     dreamTeamContainer.className = "flex justify-center gap-2 md:gap-4 w-full py-2 overflow-x-auto no-scrollbar";
 
     const used = new Set();
@@ -336,7 +358,7 @@ function updateDreamTeam(candidates) {
             `;
         }
 
-        // ใช้ w-20 เพื่อล็อคขนาดไม่ให้ยืด (Fixed Width)
+        // Lock Width (w-20)
         dreamTeamContainer.innerHTML += `
             <div class="flex-none w-20 md:w-24 rounded-xl p-2 border ${containerClass} flex flex-col items-center justify-center transition-all hover:-translate-y-1">
                 <span class="text-[8px] text-blue-300/70 uppercase font-bold mb-1 tracking-wider">${p.l}</span>
