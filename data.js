@@ -16,7 +16,7 @@ const heroesData = [
         id: 57, name: "Akai", role: "Tank", image: "img/akai.jpg",
         winRate: 50.84,
         weakAgainst: [
-            { name: "Hanabi", reason: "Akai แพ้เพราะ Hanabi มีโล่กัน CC ทำให้ Akai ปั่นผลักไม่ไปและโดนยิงฟรี (Official)" },
+            { name: "Hanabi", reason: "Akai แพ้เพราะ Hanabi มีโล่กัน CC ทำให้ Akai ปั่นผลักไม่ไปและโดนยิงฟรี" },
             { name: "Diggie", reason: "Akai แพ้เพราะ Diggie ล้างสถานะสตั๊นจากการชนกำแพงให้เพื่อนได้" },
             { name: "Valir", reason: "Akai แพ้เพราะ Valir ผลัก Akai กระเด็นออกไปตอนพยายามจะเข้าประชิด" },
             { name: "Martis", reason: "Akai แพ้เพราะ Martis มีกันสถานะ ปั่นไปก็ทำอะไรไม่ได้" },
@@ -52,7 +52,7 @@ const heroesData = [
         id: 3, name: "Lolita", role: "Support/Tank", image: "img/lolita.jpg",
         winRate: 55.87,
         weakAgainst: [
-            { name: "Melissa", reason: "Lolita แพ้เพราะตุ๊กตาของ Melissa เชื่อมดาเมจทะลุโล่ Lolita ได้ (Official)" },
+            { name: "Melissa", reason: "Lolita แพ้เพราะตุ๊กตาของ Melissa เชื่อมดาเมจทะลุโล่ Lolita ได้" },
             { name: "Natan", reason: "Lolita แพ้เพราะกระสุน Natan ตีโค้งอ้อมโล่และทะลุได้บางจังหวะ" },
             { name: "Diggie", reason: "Lolita แพ้เพราะ Diggie ล้างสตั๊นจากอัลติ Lolita ได้" },
             { name: "Gloo", reason: "Lolita แพ้เพราะ Gloo เกาะหลัง โล่ด้านหน้าจึงไร้ผล" },
@@ -196,7 +196,7 @@ const heroesData = [
         id: 118, name: "Gatotkaca", role: "Tank", image: "img/gatotkaca.jpg",
         winRate: 46.28,
         weakAgainst: [
-            { name: "Irithel", reason: "Gatotkaca แพ้เพราะโดน Irithel ยิงเจาะเกราะเข้าเนื้อ (Official)" },
+            { name: "Irithel", reason: "Gatotkaca แพ้เพราะโดน Irithel ยิงเจาะเกราะเข้าเนื้อ" },
             { name: "Karrie", reason: "Gatotkaca แพ้เพราะเกราะหนาแค่ไหนก็แพ้ True Damage" },
             { name: "Lunox", reason: "Gatotkaca แพ้เพราะ Lunox ยิงทะลุเกราะเวทย์" },
             { name: "Diggie", reason: "Gatotkaca แพ้เพราะโดดลงไปแล้ว Diggie กดอัลติช่วยเพื่อนทัน" },
@@ -212,7 +212,7 @@ const heroesData = [
             { name: "Esmeralda", reason: "Uranus แพ้เพราะโดน Esmeralda ดูดเกราะที่สร้างมา" },
             { name: "Karrie", reason: "Uranus แพ้เพราะรีเลือดไม่ทันดาเมจ Karrie" },
             { name: "Dyrroth", reason: "Uranus แพ้เพราะโดนลดเกราะแล้วฆ่า" },
-            { name: "Wanwan", reason: "Uranus แพ้เพราะเป็นเป้านิ่งให้ Wanwan เก็บ Stack บิน (Official)" }
+            { name: "Wanwan", reason: "Uranus แพ้เพราะเป็นเป้านิ่งให้ Wanwan เก็บ Stack บิน" }
         ],
         tips: "วิ่งเข้าออกไฟต์เพื่อปั่น Stack เลือดเด้ง"
     },
@@ -235,7 +235,7 @@ const heroesData = [
         winRate: 42.66,
         weakAgainst: [
             { name: "Valir", reason: "Balmond แพ้เพราะโดนผลักตอนปั่น เข้าไม่ถึงตัว" },
-            { name: "Wanwan", reason: "Balmond แพ้เพราะปั่นตาม Wanwan ไม่ทัน โดนไคท์จนตาย (Official)" },
+            { name: "Wanwan", reason: "Balmond แพ้เพราะปั่นตาม Wanwan ไม่ทัน โดนไคท์จนตาย" },
             { name: "Karrie", reason: "Balmond แพ้เพราะถึกแค่ไหนก็โดนยิงแตก" },
             { name: "Dyrroth", reason: "Balmond แพ้เพราะดวล 1-1 สู้ Dyrroth ไม่ไหว" },
             { name: "X.Borg", reason: "Balmond แพ้เพราะโดนเผาจากระยะไกล" }
@@ -306,8 +306,8 @@ const heroesData = [
         id: 8, name: "Sun", role: "Fighter", image: "img/sun.jpg",
         winRate: 53.91,
         weakAgainst: [
-            { name: "Melissa", reason: "Sun แพ้เพราะ Melissa ปาตุ๊กตาใส่ร่างปลอมแล้วยิงชิ่งโดนร่างจริงตายยกแผง (Official)" },
-            { name: "Irithel", reason: "Sun แพ้เพราะ Irithel ระเบิดดาเมจหมู่ (Splash) ยิงทีเดียวหายทั้งร่างจริงร่างปลอม (Official)" },
+            { name: "Melissa", reason: "Sun แพ้เพราะ Melissa ปาตุ๊กตาใส่ร่างปลอมแล้วยิงชิ่งโดนร่างจริงตายยกแผง" },
+            { name: "Irithel", reason: "Sun แพ้เพราะ Irithel ระเบิดดาเมจหมู่ (Splash) ยิงทีเดียวหายทั้งร่างจริงร่างปลอม" },
             { name: "X.Borg", reason: "Sun แพ้เพราะ X.Borg เผาไฟทีเดียวโดนทุกร่าง ละลายหายไปพร้อมกัน" },
             { name: "Aldous", reason: "Sun แพ้เพราะร่างปลอม Sun เป็นขนมให้ Aldous เก็บ Stack" },
             { name: "Ruby", reason: "Sun แพ้เพราะ Ruby ดูดเลือดจากร่างปลอมได้มหาศาล" }
@@ -342,7 +342,7 @@ const heroesData = [
         id: 17, name: "Hilda", role: "Fighter", image: "img/hilda.jpg",
         winRate: 53.20,
         weakAgainst: [
-            { name: "Karrie", reason: "Hilda แพ้เพราะโดน Karrie ยิงเข้าเนื้อ (Official)" },
+            { name: "Karrie", reason: "Hilda แพ้เพราะโดน Karrie ยิงเข้าเนื้อ" },
             { name: "Dyrroth", reason: "Hilda แพ้เพราะโดน Dyrroth ลดเกราะแล้วทุบ" },
             { name: "Valir", reason: "Hilda แพ้เพราะวิ่งเข้าหาไม่ได้ โดนผลัก" },
             { name: "Gloo", reason: "Hilda แพ้เพราะโดน Gloo เกาะแล้วหนีไม่ออก" },
@@ -354,7 +354,7 @@ const heroesData = [
         id: 103, name: "Lapu-Lapu", role: "Fighter", image: "img/lapu-lapu.jpg",
         winRate: 48.22,
         weakAgainst: [
-            { name: "Kaja", reason: "Lapu-Lapu แพ้เพราะโดน Kaja ดึงล็อคตายตอนกระโดดเข้ามา (Official)" },
+            { name: "Kaja", reason: "Lapu-Lapu แพ้เพราะโดน Kaja ดึงล็อคตายตอนกระโดดเข้ามา" },
             { name: "Esmeralda", reason: "Lapu-Lapu แพ้เพราะโดนดูดเกราะตอนแปลงร่าง" },
             { name: "Franco", reason: "Lapu-Lapu แพ้เพราะโดนล็อคขาขยับไม่ได้" },
             { name: "Minsitthar", reason: "Lapu-Lapu แพ้เพราะกดสกิลพุ่งไม่ได้ในวง" },
@@ -366,7 +366,7 @@ const heroesData = [
         id: 70, name: "Aldous", role: "Fighter", image: "img/aldous.jpg",
         winRate: 50.30,
         weakAgainst: [
-            { name: "Melissa", reason: "Aldous แพ้เพราะ Melissa กดอัลติผลัก Aldous กระเด็นออกไปตอนบินมาถึง (Official)" },
+            { name: "Melissa", reason: "Aldous แพ้เพราะ Melissa กดอัลติผลัก Aldous กระเด็นออกไปตอนบินมาถึง" },
             { name: "Twilight Armor", reason: "Aldous แพ้ไอเทมนี้ เพราะลดดาเมจจากการทุบทีเดียวหนักๆ" },
             { name: "Franco", reason: "Aldous แพ้เพราะโดนล็อคตายตอนบินมาถึง" },
             { name: "Esmeralda", reason: "Aldous แพ้เพราะ Esmeralda มีเกราะเยอะ ทุบไม่เข้า" },
@@ -378,7 +378,7 @@ const heroesData = [
         id: 35, name: "Leomord", role: "Fighter", image: "img/leomord.jpg",
         winRate: 52.70,
         weakAgainst: [
-            { name: "Karrie", reason: "Leomord แพ้เพราะโดน Karrie ไคท์และยิงละลายม้า (Official)" },
+            { name: "Karrie", reason: "Leomord แพ้เพราะโดน Karrie ไคท์และยิงละลายม้า" },
             { name: "Minsitthar", reason: "Leomord แพ้เพราะขี่ม้าพุ่งไม่ได้ในวง" },
             { name: "Ruby", reason: "Leomord แพ้เพราะโดน Ruby ขัดจังหวะการขี่ม้า" },
             { name: "Khufra", reason: "Leomord แพ้เพราะพุ่งชนบอล Khufra" },
@@ -405,7 +405,7 @@ const heroesData = [
             { name: "Valir", reason: "Terizla แพ้เพราะช้าและโดน Valir ผลักออกง่าย" },
             { name: "Karrie", reason: "Terizla แพ้เพราะโดน Karrie ยิงละลายเกราะ" },
             { name: "Diggie", reason: "Terizla แพ้เพราะ Diggie ล้างสถานะอัลติให้เพื่อนได้" },
-            { name: "Wanwan", reason: "Terizla แพ้เพราะตีช้า เป็นเป้าให้ Wanwan เก็บ Stack (Official)" },
+            { name: "Wanwan", reason: "Terizla แพ้เพราะตีช้า เป็นเป้าให้ Wanwan เก็บ Stack" },
             { name: "X.Borg", reason: "Terizla แพ้เพราะโดน X.Borg เผาฟรี" }
         ],
         tips: "ใช้ Flicker + อัลติ เพื่อเปิดไฟต์หมู่ที่สวยงาม"
@@ -462,7 +462,7 @@ const heroesData = [
         id: 48, name: "Guinevere", role: "Fighter", image: "img/guinevere.jpg",
         winRate: 51.45,
         weakAgainst: [
-            { name: "Hanabi", reason: "Guinevere แพ้เพราะ Hanabi มีโล่กันสถานะลอย (Official)" },
+            { name: "Hanabi", reason: "Guinevere แพ้เพราะ Hanabi มีโล่กันสถานะลอย" },
             { name: "Diggie", reason: "Guinevere แพ้เพราะ Diggie ล้างสถานะลอยให้เพื่อนได้" },
             { name: "Wanwan", reason: "Guinevere แพ้เพราะ Wanwan สกิล 2 ล้างสถานะได้" },
             { name: "Helcurt", reason: "Guinevere แพ้เพราะกระโดดใส่ Helcurt แล้วโดนใบ้ (Silence)" },
@@ -483,11 +483,11 @@ const heroesData = [
         tips: "เดินให้เกจทรายเต็มเพื่อสไลด์เข้าหาศัตรู"
     },
     {
-        id: 91, name: "Yu Zhong", role: "Fighter", image: "img/yu-zhong.jpg",
+        id: 133, name: "Yu Zhong", role: "Fighter", image: "img/yu-zhong.jpg",
         winRate: 50.18,
         weakAgainst: [
             { name: "Baxia", reason: "Yu Zhong แพ้เพราะโดน Baxia ตัดเลือดรุนแรง ดูดเลือดไม่ขึ้น" },
-            { name: "Masha", reason: "Yu Zhong แพ้เพราะ Masha ตีไวและเลือดเยอะ ดูดไม่ทัน (Official)" },
+            { name: "Masha", reason: "Yu Zhong แพ้เพราะ Masha ตีไวและเลือดเยอะ ดูดไม่ทัน" },
             { name: "Wanwan", reason: "Yu Zhong แพ้เพราะไล่ Wanwan ไม่ทันและโดนไคท์" },
             { name: "Karrie", reason: "Yu Zhong แพ้เพราะโดน Karrie ยิงทะลุความถึก" },
             { name: "Dyrroth", reason: "Yu Zhong แพ้เพราะโดน Dyrroth ลดเกราะและทุบ" }
@@ -567,11 +567,11 @@ const heroesData = [
         tips: "รักษาระยะห่าง ล็อคเป้าแล้วกระโดดไปเรื่อยๆ อย่าหยุด"
     },
     {
-        id: 70, name: "Masha", role: "Fighter", image: "img/masha.jpg",
+        id: 132, name: "Masha", role: "Fighter", image: "img/masha.jpg",
         winRate: 56.62,
         weakAgainst: [
-            { name: "Sun", reason: "Masha แพ้เพราะ Sun มีร่างปลอมรุมทุบ (Official)" },
-            { name: "Aamon", reason: "Masha แพ้เพราะตี Aamon ไม่โดนตอนหายตัว (Official)" },
+            { name: "Sun", reason: "Masha แพ้เพราะ Sun มีร่างปลอมรุมทุบ" },
+            { name: "Aamon", reason: "Masha แพ้เพราะตี Aamon ไม่โดนตอนหายตัว" },
             { name: "Baxia", reason: "Masha แพ้เพราะโดน Baxia ตัดเลือด รีเลือดไม่ขึ้น" },
             { name: "Blade Armor", reason: "Masha แพ้ไอเทมนี้เพราะตีธรรมดาแล้วเจ็บเอง" },
             { name: "Belerick", reason: "Masha แพ้เพราะตีรัวแล้วโดน Belerick สะท้อนตาย" }
@@ -632,7 +632,7 @@ const heroesData = [
         id: 42, name: "Saber", role: "Assassin", image: "img/saber.jpg",
         winRate: 51.58,
         weakAgainst: [
-            { name: "Hanabi", reason: "Saber แพ้เพราะ Hanabi มีโล่กัน CC ยกไม่ขึ้น (Official)" },
+            { name: "Hanabi", reason: "Saber แพ้เพราะ Hanabi มีโล่กัน CC ยกไม่ขึ้น" },
             { name: "Argus", reason: "Saber แพ้เพราะ Argus กดอมตะสวนอัลติ" },
             { name: "Diggie", reason: "Saber แพ้เพราะ Diggie กดเกราะกันตายให้เพื่อนได้" },
             { name: "Antique Cuirass", reason: "Saber แพ้ไอเทมเกราะนี้ ดาเมจหายไปเยอะมาก" },
@@ -656,7 +656,7 @@ const heroesData = [
         id: 127, name: "Fanny", role: "Assassin", image: "img/fanny.jpg",
         winRate: 42.67,
         weakAgainst: [
-            { name: "Kaja", reason: "Fanny แพ้เพราะโดน Kaja ล็อคขาร่วงจากเชือก (Official)" },
+            { name: "Kaja", reason: "Fanny แพ้เพราะโดน Kaja ล็อคขาร่วงจากเชือก" },
             { name: "Khufra", reason: "Fanny แพ้เพราะบินชนบอล Khufra ร่วงตลอด" },
             { name: "Saber", reason: "Fanny แพ้เพราะโดน Saber ล็อคตายกลางอากาศ" },
             { name: "Franco", reason: "Fanny แพ้เพราะโดน Franco กดอัลติล็อค" },
@@ -680,7 +680,7 @@ const heroesData = [
         id: 46, name: "Natalia", role: "Assassin", image: "img/natalia.jpg",
         winRate: 51.49,
         weakAgainst: [
-            { name: "Rafaela", reason: "Natalia แพ้เพราะ Rafaela เปิด Vision หาตัวเจอ (Official)" },
+            { name: "Rafaela", reason: "Natalia แพ้เพราะ Rafaela เปิด Vision หาตัวเจอ" },
             { name: "Yi Sun-shin", reason: "Natalia แพ้เพราะ YSS เปิดอัลติหาตำแหน่งเจอ" },
             { name: "Kaja", reason: "Natalia แพ้เพราะโผล่มาก็โดน Kaja ล็อคทันที" },
             { name: "Hylos", reason: "Natalia แพ้เพราะ Hylos ถึกเกินและมีวงเผา" },
@@ -740,7 +740,7 @@ const heroesData = [
         id: 116, name: "Ling", role: "Assassin", image: "img/ling.jpg",
         winRate: 46.64,
         weakAgainst: [
-            { name: "Aamon", reason: "Ling แพ้เพราะ Aamon ล็อคเป้าเบิร์ส Ling ตายคาที่ (Official)" },
+            { name: "Aamon", reason: "Ling แพ้เพราะ Aamon ล็อคเป้าเบิร์ส Ling ตายคาที่" },
             { name: "Kaja", reason: "Ling แพ้เพราะโดนดึงลงจากกำแพง" },
             { name: "Saber", reason: "Ling แพ้เพราะโดน Saber ล็อคอัลติร่วง" },
             { name: "Khufra", reason: "Ling แพ้เพราะ Khufra ดักทางกระโดด" },
@@ -749,10 +749,10 @@ const heroesData = [
         tips: "บริหารค่า Energy (Bar สีฟ้า) ให้ดี อย่าให้หมดกลางวงศัตรู"
     },
     {
-        id: 35, name: "Benedetta", role: "Assassin", image: "img/benedetta.jpg",
+        id: 134, name: "Benedetta", role: "Assassin", image: "img/benedetta.jpg",
         winRate: 51.95,
         weakAgainst: [
-            { name: "Irithel", reason: "Benedetta แพ้เพราะ Irithel วิ่งยิงได้ Benedetta จับตัวยาก (Official)" },
+            { name: "Irithel", reason: "Benedetta แพ้เพราะ Irithel วิ่งยิงได้ Benedetta จับตัวยาก" },
             { name: "Phoveus", reason: "Benedetta แพ้เพราะทุกครั้งที่พุ่ง Phoveus จะทุบ" },
             { name: "Minsitthar", reason: "Benedetta แพ้เพราะพุ่งไม่ได้ในวง" },
             { name: "Khufra", reason: "Benedetta แพ้เพราะพุ่งติดบอล Khufra" },
@@ -773,10 +773,10 @@ const heroesData = [
         tips: "วางกับดัก (Trap) ในพุ่มไม้เพื่อเปิด Vision และคอมโบสกิล 2 สตั๊นระยะไกล"
     },
     {
-        id: 11, name: "Aamon", role: "Assassin", image: "img/aamon.jpg",
+        id: 136, name: "Aamon", role: "Assassin", image: "img/aamon.jpg",
         winRate: 53.55,
         weakAgainst: [
-            { name: "Rafaela", reason: "Aamon แพ้เพราะ Rafaela เปิด Vision หาตัวเจอ (Official)" },
+            { name: "Rafaela", reason: "Aamon แพ้เพราะ Rafaela เปิด Vision หาตัวเจอ" },
             { name: "Kaja", reason: "Aamon แพ้เพราะโดน Kaja ล็อคตาย" },
             { name: "Eudora", reason: "Aamon แพ้เพราะโดน Eudora สตั๊นและเบิร์ส" },
             { name: "Hylos", reason: "Aamon แพ้เพราะ Hylos ถึกมากและมีวงสโลว์" },
@@ -838,7 +838,7 @@ const heroesData = [
         id: 51, name: "Cyclops", role: "Mage", image: "img/cyclops.jpg",
         winRate: 51.21,
         weakAgainst: [
-            { name: "Lolita", reason: "Cyclops แพ้เพราะ Lolita บล็อคสกิลได้หมด (Official)" },
+            { name: "Lolita", reason: "Cyclops แพ้เพราะ Lolita บล็อคสกิลได้หมด" },
             { name: "Lancelot", reason: "Cyclops แพ้เพราะ Lancelot หลบสกิลได้ง่าย" },
             { name: "Gusion", reason: "Cyclops แพ้เพราะโดน Gusion เบิร์สไวเกินไป" },
             { name: "Kaja", reason: "Cyclops แพ้เพราะโดน Kaja ล็อคตาย" },
@@ -912,7 +912,7 @@ const heroesData = [
         weakAgainst: [
             { name: "Minsitthar", reason: "Harith แพ้เพราะแดชไม่ได้ในวง Minsitthar" },
             { name: "Khufra", reason: "Harith แพ้เพราะแดชติดบอล Khufra" },
-            { name: "Esmeralda", reason: "Harith แพ้เพราะโดน Esmeralda ดูดเกราะ (Official)" },
+            { name: "Esmeralda", reason: "Harith แพ้เพราะโดน Esmeralda ดูดเกราะ" },
             { name: "Phoveus", reason: "Harith แพ้เพราะทุกครั้งที่แดช Phoveus จะทุบ" },
             { name: "Kaja", reason: "Harith แพ้เพราะโดน Kaja ล็อคตาย" }
         ],
@@ -982,7 +982,7 @@ const heroesData = [
         id: 76, name: "Lylia", role: "Mage", image: "img/lylia.jpg",
         winRate: 49.95,
         weakAgainst: [
-            { name: "Kaja", reason: "Lylia แพ้เพราะโดน Kaja ล็อคตายก่อนได้กดอัลติ (Official)" },
+            { name: "Kaja", reason: "Lylia แพ้เพราะโดน Kaja ล็อคตายก่อนได้กดอัลติ" },
             { name: "Franco", reason: "Lylia แพ้เพราะโดน Franco ล็อคขา กดอัลติไม่ได้" },
             { name: "Chou", reason: "Lylia แพ้เพราะโดน Chou เตะใบ้" },
             { name: "Saber", reason: "Lylia แพ้เพราะโดน Saber ล็อคตาย" },
@@ -1030,7 +1030,7 @@ const heroesData = [
         id: 50, name: "Vexana", role: "Mage", image: "img/vexana.jpg",
         winRate: 51.30,
         weakAgainst: [
-            { name: "Hanabi", reason: "Vexana แพ้เพราะ Hanabi มีโล่กัน CC (Official)" },
+            { name: "Hanabi", reason: "Vexana แพ้เพราะ Hanabi มีโล่กัน CC " },
             { name: "Joy", reason: "Vexana แพ้เพราะ Joy พริ้วเกินกว่าจะสกิลโดน" },
             { name: "Fanny", reason: "Vexana แพ้เพราะโดน Fanny ล้วงตายไว" },
             { name: "Ling", reason: "Vexana แพ้เพราะโดน Ling ล้วง" },
@@ -1140,9 +1140,9 @@ const heroesData = [
         id: 7, name: "Melissa", role: "Marksman", image: "img/melissa.jpg",
         winRate: 53.91,
         weakAgainst: [
-            { name: "Yve", reason: "Melissa แพ้เพราะ Yve ยิงจากนอกโดม (Official)" },
-            { name: "Pharsa", reason: "Melissa แพ้เพราะ Pharsa ระเบิดจากนอกโดม (Official)" },
-            { name: "Lylia", reason: "Melissa แพ้เพราะ Lylia สแปมระเบิดใส่ (Official)" },
+            { name: "Yve", reason: "Melissa แพ้เพราะ Yve ยิงจากนอกโดม " },
+            { name: "Pharsa", reason: "Melissa แพ้เพราะ Pharsa ระเบิดจากนอกโดม " },
+            { name: "Lylia", reason: "Melissa แพ้เพราะ Lylia สแปมระเบิดใส่ " },
             { name: "Franco", reason: "Melissa แพ้เพราะโดนดึงทะลุโดม" },
             { name: "Kaja", reason: "Melissa แพ้เพราะโดนดึงทะลุโดม" }
         ],
@@ -1176,7 +1176,7 @@ const heroesData = [
         id: 25, name: "Popol & Kupa", role: "Marksman", image: "img/popol.jpg",
         winRate: 52.61,
         weakAgainst: [
-            { name: "Hanabi", reason: "Popol แพ้เพราะ Hanabi ยิงชิ่งหมาโดนคน (Official)" },
+            { name: "Hanabi", reason: "Popol แพ้เพราะ Hanabi ยิงชิ่งหมาโดนคน" },
             { name: "Faramis", reason: "Popol แพ้เพราะ Faramis ยิงชิ่งหมาแรงมาก" },
             { name: "Luo Yi", reason: "Popol แพ้เพราะโดนดูดหมาชนคน" },
             { name: "Gloo", reason: "Popol แพ้เพราะ Gloo เหยียบหมามาหาคน" },
@@ -1200,7 +1200,7 @@ const heroesData = [
         id: 96, name: "Wanwan", role: "Marksman", image: "img/wanwan.jpg",
         winRate: 48.49,
         weakAgainst: [
-            { name: "Kaja", reason: "Wanwan แพ้เพราะโดน Kaja ล็อคตาย (Official)" },
+            { name: "Kaja", reason: "Wanwan แพ้เพราะโดน Kaja ล็อคตาย " },
             { name: "Phoveus", reason: "Wanwan แพ้เพราะโดดแล้วโดน Phoveus ทุบ" },
             { name: "Khufra", reason: "Wanwan แพ้เพราะโดดติดบอล Khufra" },
             { name: "Minsitthar", reason: "Wanwan แพ้เพราะโดดไม่ได้ในวง" },
@@ -1212,7 +1212,7 @@ const heroesData = [
         id: 68, name: "Claude", role: "Marksman", image: "img/claude.jpg",
         winRate: 50.45,
         weakAgainst: [
-            { name: "Kaja", reason: "Claude แพ้เพราะโดน Kaja ดึงตอนอัลติ (Official)" },
+            { name: "Kaja", reason: "Claude แพ้เพราะโดน Kaja ดึงตอนอัลติ " },
             { name: "Belerick", reason: "Claude แพ้เพราะหมุนใส่ Belerick แล้วตายเอง" },
             { name: "Lesley", reason: "Claude แพ้เพราะโดน Lesley ยิง 2 ทีร่วง" },
             { name: "Saber", reason: "Claude แพ้เพราะโดน Saber ล็อคตาย" },
@@ -1240,7 +1240,7 @@ const heroesData = [
             { name: "Fanny", reason: "Granger แพ้เพราะเล็งกระสุนใส่ Fanny ยาก" },
             { name: "Lolita", reason: "Granger แพ้เพราะ Lolita บล็อคกระสุนหมด" },
             { name: "Gloo", reason: "Granger แพ้เพราะยิงติด Gloo ตัวหน้า" },
-            { name: "Aamon", reason: "Granger แพ้เพราะ Aamon หายตัวหลบกระสุน (Official)" }
+            { name: "Aamon", reason: "Granger แพ้เพราะ Aamon หายตัวหลบกระสุน " }
         ],
         tips: "ยิงกระสุนนัดสุดท้าย (สีแดง) ให้โดน จะติดคริรุนแรง"
     },
@@ -1260,7 +1260,7 @@ const heroesData = [
         id: 36, name: "Brody", role: "Marksman", image: "img/brody.jpg",
         winRate: 51.79,
         weakAgainst: [
-            { name: "Sun", reason: "Brody แพ้เพราะล็อคเป้าผิดไปโดนร่างปลอม Sun (Official)" },
+            { name: "Sun", reason: "Brody แพ้เพราะล็อคเป้าผิดไปโดนร่างปลอม Sun " },
             { name: "Popol & Kupa", reason: "Brody แพ้เพราะล็อคเป้าโดนหมา" },
             { name: "Gloo", reason: "Brody แพ้เพราะล็อคเป้าโดนร่างแยก Gloo" },
             { name: "Natalia", reason: "Brody แพ้เพราะโดนใบ้ กดสกิลไม่ได้" },
@@ -1380,7 +1380,7 @@ const heroesData = [
         id: 14, name: "Ixia", role: "Marksman", image: "img/ixia.jpg",
         winRate: 53.26,
         weakAgainst: [
-            { name: "Melissa", reason: "Ixia แพ้เพราะโดน Melissa ขัดจังหวะ (Official)" },
+            { name: "Melissa", reason: "Ixia แพ้เพราะโดน Melissa ขัดจังหวะ " },
             { name: "Tigreal", reason: "Ixia แพ้เพราะโดน Tigreal ดันขัดอัลติ" },
             { name: "Franco", reason: "Ixia แพ้เพราะยืนนิ่งให้ดึง" },
             { name: "Kaja", reason: "Ixia แพ้เพราะยืนนิ่งให้ดึง" },
@@ -1418,7 +1418,7 @@ const heroesData = [
         id: 37, name: "Carmilla", role: "Support", image: "img/carmilla.jpg",
         winRate: 51.78,
         weakAgainst: [
-            { name: "Karrie", reason: "Carmilla แพ้เพราะโดน Karrie ยิงละลาย (Official)" },
+            { name: "Karrie", reason: "Carmilla แพ้เพราะโดน Karrie ยิงละลาย " },
             { name: "Diggie", reason: "Carmilla แพ้เพราะ Diggie ล้างสโลว์และอัลติได้" },
             { name: "Valentina", reason: "Carmilla แพ้เพราะ Valentina ก็อปอัลติไปใช้คืน" },
             { name: "Valir", reason: "Carmilla แพ้เพราะเข้าไม่ถึงตัว Valir" },
@@ -1430,7 +1430,7 @@ const heroesData = [
         id: 4, name: "Diggie", role: "Support", image: "img/diggie.jpg",
         winRate: 54.96,
         weakAgainst: [
-            { name: "Sun", reason: "Diggie แพ้เพราะโดนร่างปลอม Sun รุมทุบตายไวมาก (Official)" },
+            { name: "Sun", reason: "Diggie แพ้เพราะโดนร่างปลอม Sun รุมทุบตายไวมาก " },
             { name: "Natalia", reason: "Diggie แพ้เพราะโดน Natalia ล้วงตายง่าย" },
             { name: "Hilda", reason: "Diggie แพ้เพราะโดน Hilda ดักทุบในพุ่ม" },
             { name: "Aldous", reason: "Diggie แพ้เพราะโดน Aldous ทุบทีเดียวแตก" },
@@ -1439,7 +1439,7 @@ const heroesData = [
         tips: "เก็บอัลติไว้ใช้แก้ทาง CC หมู่ (Atlas/Tigreal/Guinevere) เท่านั้น"
     },
     {
-        id: 117, name: "Estes", role: "Support", image: "img/estes.jpg",
+        id: 135, name: "Estes", role: "Support", image: "img/estes.jpg",
         winRate: 53.36,
         weakAgainst: [
             { name: "Luo Yi", reason: "Estes แพ้เพราะยืนกระจุกกัน โดน Luo Yi ระเบิดตายหมู่" },
@@ -1466,7 +1466,7 @@ const heroesData = [
         id: 126, name: "Mathilda", role: "Support", image: "img/mathilda.jpg",
         winRate: 44.10,
         weakAgainst: [
-            { name: "Irithel", reason: "Mathilda แพ้เพราะโดน Irithel ยิงร่วงตอนบิน (Official)" },
+            { name: "Irithel", reason: "Mathilda แพ้เพราะโดน Irithel ยิงร่วงตอนบิน " },
             { name: "Wanwan", reason: "Mathilda แพ้เพราะ Wanwan สวนตอนบินเข้ามาได้" },
             { name: "Kaja", reason: "Mathilda แพ้เพราะโดน Kaja ล็อคตอนบิน" },
             { name: "Franco", reason: "Mathilda แพ้เพราะโดน Franco ดึง" },
@@ -1509,5 +1509,78 @@ const heroesData = [
             { name: "Kaja", reason: "Kalea แพ้เพราะโดนดึง" }
         ],
         tips: "เกาะติดเพื่อนไว้เสมอ อย่าเดินคนเดียว"
+    },
+// --- เพิ่มเติม 6 ตัวที่หายไป ---
+    {
+        id: 137, name: "Argus", role: "Fighter", image: "img/argus.jpg",
+        winRate: 51.20,
+        weakAgainst: [
+            { name: "Valir", reason: "Argus แพ้เพราะโดน Valir ผลักออกตอนเปิดอมตะ ทำให้เสียเวลาฟรี" },
+            { name: "Akai", reason: "Argus แพ้เพราะโดน Akai ปั่นผลักออกไปในช่วงอมตะ" },
+            { name: "Franco", reason: "Argus แพ้เพราะโดน Franco กดอัลติล็อคขาตายในช่วงอมตะ" },
+            { name: "Baxia", reason: "Argus แพ้เพราะ Baxia ถึกและลดการดูดเลือดของ Argus" },
+            { name: "Kaja", reason: "Argus แพ้เพราะโดน Kaja ดึงล็อคขาตายขยับไปไหนไม่ได้" }
+        ],
+        tips: "กดใช้อัลติเมื่อเลือดใกล้หมดเพื่อเปลี่ยนดาเมจที่ได้รับเป็นเลือด"
+    },
+    {
+        id: 138, name: "Esmeralda", role: "Mage/Fighter", image: "img/esmeralda.jpg",
+        winRate: 50.45,
+        weakAgainst: [
+            { name: "Baxia", reason: "Esmeralda แพ้เพราะ Baxia ตัดเลือดและกันดาเมจเวทย์ได้ดีมาก" },
+            { name: "Karrie", reason: "Esmeralda แพ้เพราะโดน Karrie ยิง True Damage ทะลุเกราะขาว" },
+            { name: "Valir", reason: "Esmeralda แพ้เพราะโดน Valir สโลว์และผลักจนเข้าไม่ถึงตัว" },
+            { name: "Dyrroth", reason: "Esmeralda แพ้เพราะ Dyrroth ลดเกราะและเบิร์สดาเมจชุดเดียวร่วง" },
+            { name: "Minsitthar", reason: "Esmeralda แพ้เพราะกดสกิลกระโดดไม่ได้ในวงของ Minsitthar" }
+        ],
+        tips: "เน้นกดสกิล 1 บ่อยๆ เพื่อดูดเกราะจากศัตรูมาเป็นของตัวเอง"
+    },
+    {
+        id: 139, name: "Jawhead", role: "Fighter", image: "img/jawhead.jpg",
+        winRate: 49.88,
+        weakAgainst: [
+            { name: "Valir", reason: "Jawhead แพ้เพราะเข้าไม่ถึงตัว Valir โดนผลักตลอดทาง" },
+            { name: "Wanwan", reason: "Jawhead แพ้เพราะโดน Wanwan ไคท์และล้างสถานะงัดได้" },
+            { name: "Karrie", reason: "Jawhead แพ้เพราะโดน Karrie ยิงละลายไวมากช่วงเลทเกม" },
+            { name: "Baxia", reason: "Jawhead แพ้เพราะ Baxia ถึกเกินกว่าจะเบิร์สให้ตาย" },
+            { name: "Martis", reason: "Jawhead แพ้เพราะ Martis มีกันสถานะตอนปั่น สวน Jawhead ได้" }
+        ],
+        tips: "ใช้สกิลโยนศัตรูเข้าหาเพื่อนหรือโยนเข้าป้อมเพื่อปิดคิล"
+    },
+    {
+        id: 140, name: "Silvanna", role: "Fighter/Mage", image: "img/silvanna.jpg",
+        winRate: 48.56,
+        weakAgainst: [
+            { name: "Diggie", reason: "Silvanna แพ้เพราะ Diggie ล้างสถานะขังในอัลติให้เพื่อนได้" },
+            { name: "Valir", reason: "Silvanna แพ้เพราะโดนผลักออกจากวงอัลติของตัวเอง" },
+            { name: "Akai", reason: "Silvanna แพ้เพราะโดน Akai ปั่นผลักกระเด็นหนี" },
+            { name: "Khufra", reason: "Silvanna แพ้เพราะ Khufra ขัดจังหวะการพุ่งแทงได้ง่าย" },
+            { name: "Helcurt", reason: "Silvanna แพ้เพราะโดน Helcurt ใบ้จนกดสกิลไม่ออก" }
+        ],
+        tips: "พุ่งเข้าหาเป้าหมายที่เป็น Mage หรือ Marksman แล้วกดอัลติขังเพื่อฆ่า"
+    },
+    {
+        id: 141, name: "Paquito", role: "Fighter", image: "img/paquito.jpg",
+        winRate: 49.12,
+        weakAgainst: [
+            { name: "Khufra", reason: "Paquito แพ้เพราะพุ่งติดบอล Khufra บ่อยมาก" },
+            { name: "Minsitthar", reason: "Paquito แพ้เพราะกดสกิลพุ่งไม่ได้เลยในวงอัลติ" },
+            { name: "Phoveus", reason: "Paquito แพ้เพราะทุกครั้งที่พุ่ง Phoveus จะทุบสวน (Hard Counter)" },
+            { name: "Valir", reason: "Paquito แพ้เพราะเข้าประชิดไม่ได้ โดนผลักและสโลว์" },
+            { name: "Franco", reason: "Paquito แพ้เพราะโดน Franco ล็อคตายก่อนได้ทำคอมโบ" }
+        ],
+        tips: "บริหาร Stack สีแดงให้ดี เพื่อออกสกิลได้ต่อเนื่องและแรงขึ้น"
+    },
+    {
+        id: 142, name: "Nana", role: "Mage/Support", image: "img/nana.jpg",
+        winRate: 52.33,
+        weakAgainst: [
+            { name: "Helcurt", reason: "Nana แพ้เพราะโดน Helcurt ใบ้และเบิร์สจนตายก่อนร่าง Passive ทำงาน" },
+            { name: "Saber", reason: "Nana แพ้เพราะโดน Saber ยกชุดเดียวร่าง Passive หลุดทันที" },
+            { name: "Natalia", reason: "Nana แพ้เพราะโดนล้วงเงียบๆ และใบ้จนกดสกิลหนีไม่ทัน" },
+            { name: "Ling", reason: "Nana แพ้เพราะ Ling เข้าถึงตัวไวและตามฆ่าหลังร่าง Passive หมด" },
+            { name: "Hayabusa", reason: "Nana แพ้เพราะ Hayabusa ล้วงฆ่าง่ายและหลบสกิลตุ๊กตาได้" }
+        ],
+        tips: "วางตุ๊กตา Molina ไว้ในพุ่มไม้หรือทางแคบเพื่อโซนพื้นที่"
     }
 ];
