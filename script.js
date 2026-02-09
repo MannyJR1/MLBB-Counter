@@ -73,7 +73,7 @@ searchInput.addEventListener('input', (e) => {
     displayHeroes(filtered);
 });
 
-// --- 2. Modal (รองรับ String/Object) ---
+// --- 2. Modal ---
 function openModal(hero) {
     document.getElementById('modalName').innerText = hero.name;
     document.getElementById('modalRole').innerText = hero.role;
@@ -85,7 +85,7 @@ function openModal(hero) {
     
     if (hero.weakAgainst) {
         hero.weakAgainst.forEach(item => {
-            // [แก้จุดที่ 1] เช็คว่าเป็น String หรือ Object
+            // รองรับทั้ง String และ Object
             let name = typeof item === 'string' ? item : item.name;
             let reason = typeof item === 'string' ? 'แพ้ทาง (Counter Pick)' : item.reason;
             
@@ -111,7 +111,7 @@ function closeModal() {
     document.body.classList.remove('modal-open');
 }
 
-// --- 3. Team Analysis (รองรับ String/Object + Responsive) ---
+// --- 3. Team Analysis ---
 const teamModal = document.getElementById('teamModal');
 const pickerGrid = document.getElementById('pickerGrid');
 const suggestionList = document.getElementById('suggestionList');
@@ -214,7 +214,7 @@ document.getElementById('teamSearch').addEventListener('input', (e) => {
     renderPickerGrid(e.target.value);
 });
 
-// --- Logic วิเคราะห์ทีม (รองรับ Data แบบผสม) ---
+// --- Logic วิเคราะห์ทีม ---
 function analyzeTeam() {
     suggestionList.innerHTML = '';
     dreamTeamContainer.innerHTML = '<div class="text-gray-500 text-[10px] w-full text-center py-2 border border-dashed border-gray-600 rounded">เลือกศัตรู...</div>';
@@ -228,10 +228,10 @@ function analyzeTeam() {
     let reasons = {};
 
     enemyTeam.forEach(enemy => {
-        if (!enemy.weakAgainst) return; // ข้ามถ้าไม่มีข้อมูล
+        if (!enemy.weakAgainst) return; 
 
         enemy.weakAgainst.forEach(weak => {
-            // [แก้จุดที่ 2] เช็คว่าเป็น String หรือ Object
+            // รองรับทั้ง String และ Object
             let name = typeof weak === 'string' ? weak : weak.name;
             let reason = typeof weak === 'string' ? 'ชนะทางโดยธรรมชาติ' : weak.reason;
             
@@ -239,7 +239,6 @@ function analyzeTeam() {
             if (!reasons[name]) reasons[name] = [];
             
             scores[name] += 10;
-            // ไฮไลท์ชื่อศัตรูที่แพ้ทาง
             reasons[name].push(`<span class="text-red-300 font-bold">${enemy.name}</span>: ${reason}`);
         });
     });
@@ -258,16 +257,17 @@ function analyzeTeam() {
     sorted.slice(0, 15).forEach((item, index) => {
         const badge = item.pureScore >= 1 ? `<span class="bg-yellow-500 text-black text-[9px] font-bold px-1.5 rounded ml-2">KILL ${item.pureScore}</span>` : '';
         
-        // [แก้จุดที่ 3] Responsive Reasons (Mobile ย่อ / Desktop เต็ม)
+        // --- Responsive Reasons Logic ---
         let reasonsHtml = '';
         if (item.reasons.length > 0) {
+            // บรรทัดแรก (โชว์เสมอ)
             reasonsHtml += `<li class="mb-0.5 text-gray-300">• ${item.reasons[0]}</li>`;
             
             if (item.reasons.length > 1) {
                 const remaining = item.reasons.slice(1);
-                // ซ่อนในมือถือ (hidden), โชว์ในคอม (md:block)
+                // บนมือถือ (ซ่อน), บนคอม (โชว์)
                 reasonsHtml += remaining.map(r => `<li class="mb-0.5 text-gray-400 hidden md:block">• ${r}</li>`).join('');
-                // สรุปยอดในมือถือ (block md:hidden)
+                // สรุปยอดบนมือถือ (โชว์เฉพาะมือถือ)
                 reasonsHtml += `<li class="mt-1 text-yellow-500/80 text-[9px] italic block md:hidden ml-1">...และอีก ${remaining.length} ตัว</li>`;
             }
         } else {
@@ -275,7 +275,7 @@ function analyzeTeam() {
         }
 
         suggestionList.innerHTML += `
-            <div class="flex gap-3 p-2 rounded-lg border border-gray-700 bg-gray-800 items-start">
+            <div class="flex gap-3 p-2 rounded-lg border border-gray-700 bg-gray-800 items-start hover:bg-gray-750 transition-colors">
                 <div class="relative shrink-0">
                     <img src="hero icon/${item.name}.png" class="w-12 h-12 rounded-lg bg-black border border-gray-600">
                     <div class="absolute -top-2 -left-2 bg-gray-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-gray-500 font-bold shadow-md">#${index+1}</div>
@@ -296,9 +296,10 @@ function analyzeTeam() {
     updateDreamTeam(sorted);
 }
 
-// --- 4. Dream Team (ไม่ยืด & สวยงาม) ---
+// --- 4. Dream Team (แก้ไขให้ไม่ยืด) ---
 function updateDreamTeam(candidates) {
     dreamTeamContainer.innerHTML = '';
+    // จัดกึ่งกลาง และไม่ให้ยืดเต็มจอ (ใช้ justify-center)
     dreamTeamContainer.className = "flex justify-center gap-2 md:gap-4 w-full py-2 overflow-x-auto no-scrollbar";
 
     const used = new Set();
@@ -335,6 +336,7 @@ function updateDreamTeam(candidates) {
             `;
         }
 
+        // ใช้ w-20 เพื่อล็อคขนาดไม่ให้ยืด (Fixed Width)
         dreamTeamContainer.innerHTML += `
             <div class="flex-none w-20 md:w-24 rounded-xl p-2 border ${containerClass} flex flex-col items-center justify-center transition-all hover:-translate-y-1">
                 <span class="text-[8px] text-blue-300/70 uppercase font-bold mb-1 tracking-wider">${p.l}</span>
