@@ -110,7 +110,7 @@ function closeModal() {
     document.body.classList.remove('modal-open');
 }
 
-// --- 3. Team Analysis (Selection & Suggestions) ---
+// --- 3. Team Analysis (Selection & Interaction) ---
 const teamModal = document.getElementById('teamModal');
 const pickerGrid = document.getElementById('pickerGrid');
 const suggestionList = document.getElementById('suggestionList');
@@ -219,14 +219,13 @@ if(teamSearchInput) {
     });
 }
 
-// --- 4. Logic วิเคราะห์ทีม (Gold Theme + Full List) ---
-// --- 4. Logic วิเคราะห์ทีม (ปรับปรุงให้เหมือนรูปตัวอย่างเป๊ะ) ---
+// --- 4. Logic วิเคราะห์ทีม (ขยายเป็น 20 อันดับ + UI ขนาดใหญ่ขึ้น) ---
 function analyzeTeam() {
     suggestionList.innerHTML = '';
-    dreamTeamContainer.innerHTML = '<div class="text-gray-500 text-[10px] w-full text-center py-2 border border-dashed border-gray-600 rounded">เลือกศัตรู...</div>';
+    dreamTeamContainer.innerHTML = '<div class="text-gray-400 text-xs w-full text-center py-3 border border-dashed border-gray-600 rounded-lg">เลือกศัตรูเพื่อจัดทีม...</div>';
 
     if (enemyTeam.length === 0) {
-        suggestionList.innerHTML = `<div class="text-center text-gray-500 mt-20 opacity-60"><p class="text-5xl mb-3">🛡️</p><p>เลือกฮีโร่ฝั่งตรงข้ามเพื่อเริ่มวิเคราะห์</p></div>`;
+        suggestionList.innerHTML = `<div class="text-center text-gray-500 mt-20 opacity-60"><p class="text-6xl mb-4">🛡️</p><p class="text-lg">เลือกฮีโร่ฝั่งตรงข้ามเพื่อเริ่มวิเคราะห์</p></div>`;
         return;
     }
 
@@ -256,54 +255,52 @@ function analyzeTeam() {
         return { name: key, score: scores[key], reasons: reasons[key] || [], info, pureScore: reasons[key] ? reasons[key].length : 0 };
     }).filter(i => i).sort((a, b) => b.score - a.score);
 
-    sorted.slice(0, 15).forEach((item, index) => {
-        // เช็คเงื่อนไข Gold Theme (แก้ทาง 2 ตัวขึ้นไป)
+    // --- แสดงผลสูงสุด 20 อันดับ ---
+    sorted.slice(0, 20).forEach((item, index) => {
         const isGold = item.pureScore >= 2;
 
-        // กำหนด Class ตามธีม
         const containerClass = isGold 
-            ? "border-2 border-yellow-500 bg-[#151515] shadow-lg shadow-yellow-900/20" 
+            ? "border-2 border-yellow-500 bg-[#151515] shadow-[0_0_20px_rgba(234,179,8,0.2)]" 
             : "border border-gray-700 bg-gray-800 hover:bg-gray-750";
 
         const badge = item.pureScore >= 1 
-            ? `<span class="${isGold ? 'bg-yellow-500 text-black' : 'bg-gray-600 text-white'} text-[10px] font-extrabold px-1.5 py-0.5 rounded ml-2 flex items-center gap-1">KILL ${item.pureScore} ${isGold ? '🔥' : ''}</span>` 
+            ? `<span class="${isGold ? 'bg-yellow-500 text-black' : 'bg-gray-600 text-white'} text-[12px] font-black px-2 py-0.5 rounded-md ml-2 flex items-center gap-1 shadow-md">KILL ${item.pureScore} ${isGold ? '🔥' : ''}</span>` 
             : '';
 
-        // สร้างรายการเหตุผลแบบแสดงผลครบทุกบรรทัด
         let reasonsHtml = '';
         if (item.reasons.length > 0) {
             reasonsHtml = item.reasons.map(r => 
-                `<li class="mb-1.5 text-[11px] leading-relaxed flex items-start gap-2">
-                    <span class="mt-1 w-1.5 h-1.5 rounded-full bg-gray-500 shrink-0"></span> 
+                `<li class="mb-2 text-[13px] leading-relaxed flex items-start gap-2">
+                    <span class="mt-1.5 w-2 h-2 rounded-full bg-yellow-500/50 shrink-0"></span> 
                     <span>${r}</span>
                 </li>`
             ).join('');
         } else {
-            reasonsHtml = '<li class="text-gray-500 text-[10px]">Pick จาก Win Rate สูง</li>';
+            reasonsHtml = '<li class="text-gray-500 text-[13px]">แนะนำตาม Win Rate พื้นฐาน</li>';
         }
 
         suggestionList.innerHTML += `
-            <div class="p-3 rounded-xl ${containerClass} mb-3 relative overflow-hidden group transition-all">
-                <div class="flex gap-4 mb-3 relative z-10">
+            <div class="p-4 rounded-2xl ${containerClass} mb-4 relative overflow-hidden group transition-all duration-300">
+                <div class="flex gap-5 mb-4 relative z-10">
                     <div class="relative shrink-0">
-                        <img src="hero icon/${item.name}.png" class="w-14 h-14 rounded-lg bg-black border border-gray-600 object-cover">
-                        <div class="absolute -top-2 -left-2 w-6 h-6 rounded-full flex items-center justify-center bg-gray-700 text-white border border-gray-500 text-[10px] font-bold shadow-md">#${index+1}</div>
+                        <img src="hero icon/${item.name}.png" class="w-16 h-16 rounded-2xl bg-black border border-gray-600 object-cover shadow-lg">
+                        <div class="absolute -top-2 -left-2 w-7 h-7 rounded-full flex items-center justify-center bg-gray-700 text-white border border-gray-500 text-[12px] font-bold shadow-xl">#${index+1}</div>
                     </div>
                     <div class="flex-1 min-w-0 flex flex-col justify-center">
                         <div class="flex items-center">
-                            <h4 class="text-white font-bold text-sm truncate">${item.name}</h4>
+                            <h4 class="text-white font-bold text-lg md:text-xl truncate tracking-wide">${item.name}</h4>
                             ${badge}
                         </div>
-                        <div class="mt-1">
-                             <span class="text-[9px] text-gray-400 bg-[#2a2a2a] px-2 py-0.5 rounded border border-gray-700 uppercase font-bold tracking-wider inline-block">${item.info.role}</span>
+                        <div class="mt-1.5">
+                             <span class="text-[10px] text-gray-400 bg-[#2a2a2a] px-2.5 py-1 rounded-md border border-gray-700 uppercase font-black tracking-widest inline-block shadow-inner">${item.info.role}</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="h-px w-full ${isGold ? 'bg-yellow-500/20' : 'bg-gray-700'} mb-3"></div>
+                <div class="h-px w-full ${isGold ? 'bg-yellow-500/30' : 'bg-gray-700'} mb-4 shadow-sm"></div>
                 
                 <div class="relative z-10 pl-1">
-                    <ul class="text-gray-300">
+                    <ul class="text-gray-200">
                         ${reasonsHtml}
                     </ul>
                 </div>
@@ -312,10 +309,11 @@ function analyzeTeam() {
 
     updateDreamTeam(sorted);
 }
-// --- 5. Dream Team (Fixed Width Card Style) ---
+
+// --- 5. Dream Team (ปรับขนาดการ์ดให้เด่นขึ้น) ---
 function updateDreamTeam(candidates) {
     dreamTeamContainer.innerHTML = '';
-    dreamTeamContainer.className = "flex justify-center gap-2 md:gap-4 w-full py-2 overflow-x-auto no-scrollbar";
+    dreamTeamContainer.className = "flex justify-center gap-3 w-full py-3 overflow-x-auto no-scrollbar";
 
     const used = new Set();
     const pos = [
@@ -333,36 +331,38 @@ function updateDreamTeam(candidates) {
 
         if (best) {
             used.add(best.name);
-            containerClass = 'border-blue-500/30 bg-gradient-to-b from-gray-800 to-[#0f172a] shadow-lg shadow-blue-900/10';
+            containerClass = 'border-blue-500/50 bg-gradient-to-b from-[#1e293b] to-[#0f172a] shadow-xl shadow-blue-900/20 scale-105';
             content = `
-                <div class="relative w-10 h-10 md:w-12 md:h-12 mb-1">
-                    <img src="hero icon/${best.name}.png" class="w-full h-full rounded-full border-2 border-blue-400 object-cover">
+                <div class="relative w-12 h-12 md:w-14 md:h-14 mb-2">
+                    <img src="hero icon/${best.name}.png" class="w-full h-full rounded-full border-2 border-blue-400 object-cover shadow-md">
                 </div>
-                <span class="text-[9px] md:text-[10px] text-white font-bold truncate w-full text-center">${best.name}</span>
+                <span class="text-[10px] md:text-xs text-white font-black truncate w-full text-center tracking-tight">${best.name}</span>
             `;
         } else {
-            containerClass = 'border-gray-700 border-dashed bg-gray-800/30 opacity-60';
+            containerClass = 'border-gray-700 border-dashed bg-gray-800/30 opacity-50';
             content = `
-                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-800 flex items-center justify-center mb-1 border border-gray-600">
-                    <span class="text-gray-500 text-xs">?</span>
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-800 flex items-center justify-center mb-2 border border-gray-600">
+                    <span class="text-gray-600 text-sm">?</span>
                 </div>
-                <span class="text-[9px] text-gray-500">-</span>
+                <span class="text-[10px] text-gray-600 font-bold">-</span>
             `;
         }
 
         dreamTeamContainer.innerHTML += `
-            <div class="flex-none w-20 md:w-24 rounded-xl p-2 border ${containerClass} flex flex-col items-center justify-center transition-all hover:-translate-y-1">
-                <span class="text-[8px] text-blue-300/70 uppercase font-bold mb-1 tracking-wider">${p.l}</span>
+            <div class="flex-none w-24 rounded-2xl p-2 border ${containerClass} flex flex-col items-center justify-center transition-all hover:translate-y-[-4px]">
+                <span class="text-[9px] text-blue-300 uppercase font-black mb-1.5 tracking-widest opacity-80">${p.l}</span>
                 ${content}
             </div>`;
     });
 }
 
-// Leaderboard Logic
+// --- 6. Leaderboard Logic ---
 function closeLeaderboard() { 
     document.getElementById('leaderboardModal').classList.add('hidden'); 
     document.getElementById('leaderboardModal').classList.remove('flex'); 
+    document.body.classList.remove('modal-open');
 }
+
 function openLeaderboard() {
     const lb = document.getElementById('leaderboardContent');
     lb.innerHTML = '';
@@ -375,5 +375,5 @@ function openLeaderboard() {
     });
     document.getElementById('leaderboardModal').classList.remove('hidden');
     document.getElementById('leaderboardModal').classList.add('flex');
+    document.body.classList.add('modal-open');
 }
-
